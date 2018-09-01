@@ -41,14 +41,14 @@ The final parameters chosen were YUV colorspace, 11 orientations, 16 pixels per 
 
 Before training the SVM classfier, the features were extracted from the car and non car images using the function <code>extract_features</code>
 
-It took 158.2 Seconds to extract HOG features, Using: 11 orientations 16 pixels per cell and 2 cells per block and the lenght of Feature vector length was 1188
+It took 158.2 Seconds to extract HOG features,using 11 orientations 16 pixels/cell and 2 cells/block and the lenght of Feature vector length was 1188.
 
-In the section titled "Train a Classifier" I trained a linear SVM with the default classifier parameters and using HOG features alone and was able to achieve a test accuracy of 98.11%. a total of 1.95 seconds was used to train the SVC and it predicted 100% correctly for a sample data of 10 images
+In the section titled <code>"Train a Classifier"</code>, I trained a linear SVM with the default classifier parameters and using HOG features alone and was able to achieve a test accuracy of 98.11%. A total of 1.95 seconds was used to train the SVC and it predicted 100% correctly for a sample data of 20 images
 
 1.95 Seconds to train SVC...
 Test Accuracy of SVC =  0.9811
 
-    My SVC predicts:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
+     My SVC predicts:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
      For these 20 labels:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
      & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
      
@@ -56,9 +56,9 @@ Test Accuracy of SVC =  0.9811
 
 ### 3.1 Describe how (and identify where in your code) you implemented a sliding window search. How did you decide what scales to search and how much to overlap windows?
 
-In the section titled "Method for Using Classifier to Detect Cars in an Image" I adapted the method find_cars from the lesson materials. The method combines HOG feature extraction with a sliding window search, but rather than perform feature extraction on each window individually which can be time consuming, the HOG features are extracted for the entire image (or a selected portion of it) and then these full-image features are subsampled according to the size of the window and then fed to the classifier. The method performs the classifier prediction on the HOG features for each window region and returns a list of rectangle objects corresponding to the windows that generated a positive ("car") prediction. in the chosen image (test1.jpg) , 6 rectangles were found in image
+In the section titled <code>"Method for Using Classifier to Detect Cars in an Image"</code>, I adapted the method <code>find_cars</code> from the lesson materials. The method combines HOG feature extraction with a sliding window search. To get time effectivness, the HOG features were extracted for the entire image  and then these full-image features were subsampled according to the size of the window and then fed to the classifier. The method looks into defined window region,then predicts based on the HOG features  and returns a list of rectangle objects corresponding to the windows that generated a positive ("car") prediction. In the test image (test1.jpg) , 6 rectangles were found in image
 
-The image below shows the first attempt at using find_cars on one of the test images, using a single window size:
+The image below shows the first attempt at using <code>find_cars</code> on  the test images, using a single window size:
 
 ![Cars_with_Boxes](./images/carwithboundedbox.png) 
  
@@ -71,13 +71,13 @@ The image below shows the first attempt at using find_cars on one of the test im
  ![Cars_with_Boxes](./images/carwithboxes-3.png) 
  ![Cars_with_Boxes](./images/carwithboxes-4.png)
  
-The final algorithm calls find_cars for each window scale and the rectangles returned from each method call are aggregated. In previous implementations smaller (0.5) scales were explored but found to return too many false positives, and originally the window overlap was set to 50% in both X and Y directions, but an overlap of 75% in the Y direction (yet still 50% in the X direction) produced more redundant true positive detections, which were preferable given the heatmap strategy described below. Additionally, only an appropriate vertical range of the image is considered for each window size (e.g. smaller range for smaller scales) to reduce the chance for false positives in areas where cars at that scale are unlikely to appear. The final implementation considers 190 window locations, which proved to be robust enough to reliably detect vehicles while maintaining a high speed of execution.
+The final algorithm calls <code>find_cars</code> for each window scale and the rectangles returned from each method call are aggregated. In previous implementations smaller (0.5) scales were explored but found to return too many false positives, and originally the window overlap was set to 50% in both X and Y directions, but an overlap of 75% in the Y direction (yet still 50% in the X direction) produced more redundant true positive detections, which were preferable given the heatmap strategy described below. Additionally, only an appropriate vertical range of the image is considered for each window size (e.g. smaller range for smaller scales) to reduce the chance for false positives in areas where cars at that scale are unlikely to appear. The final implementation considers 190 window locations, which proved to be robust enough to reliably detect vehicles while maintaining a high speed of execution.
 
-The image below shows the rectangles returned by find_cars drawn onto one of the test images in the final implementation. Notice that there are several positive predictions on each of the near-field cars, and one positive prediction on a car in the oncoming lane.
+The image below shows the rectangles returned by <code>find_cars</code> drawn onto one of the test images in the final implementation. Notice that there are several positive predictions on each of the near-field cars, and one positive prediction on a car in the oncoming lane.
 
  ![Cars_with_Boxes](./images/carwithboxes-allcombined.png)
  
- Because a true positive is typically accompanied by several positive detections, while false positives are typically accompanied by only one or two detections, a combined heatmap and threshold is used to differentiate the two. The add_heat function increments the pixel value (referred to as "heat") of an all-black image the size of the original image at the location of each detection rectangle. Areas encompassed by more overlapping rectangles are assigned higher levels of heat. The following image is the resulting heatmap from the detections in the image above:
+ Because a true positive is typically accompanied by several positive detections, while false positives are typically accompanied by only one or two detections, a combined heatmap and threshold is used to differentiate the two. The <code>add_heat function</code> increments the pixel value (or heat) of an all-black image the size of the original image at the location of each detection rectangle. Areas encompassed by more overlapping rectangles are assigned higher levels of heat. The following image is the resulting heatmap from the detections in the image above:
  
   ![Heat Map](./images/heatmap1.png)
   
@@ -86,7 +86,8 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
   
  ![Heat Map](./images/heatmap2.png)
  
- The  <code>scipy.ndimage.measurements.label()</code> function collects spatially contiguous areas of the heatmap and assigns each a label:
+ The  <code>scipy.ndimage.measurements.label()</code> function collects spatially contiguous areas of the heatmap and assigns each a  
+  label:
  
   ![Heat Map](./images/heatmap3.png)
   
