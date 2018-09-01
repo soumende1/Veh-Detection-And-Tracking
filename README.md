@@ -47,6 +47,6 @@ In the section titled "Train a Classifier" I trained a linear SVM with the defau
 Test Accuracy of SVC =  0.9811
 
     My SVC predicts:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
-For these 20 labels:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
- & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
+     For these 20 labels:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
+     & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
  
