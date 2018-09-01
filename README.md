@@ -34,9 +34,10 @@ The final parameters chosen were YUV colorspace, 11 orientations, 16 pixels per 
 
 ### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-Before training the SVM classfier, the features were extracted from the car and non car images using the 
+Before training the SVM classfier, the features were extracted from the car and non car images using the
+    
     function 
-    extract_features. 
+     extract_features
 
 It took 158.2 Seconds to extract HOG features, Using: 11 orientations 16 pixels per cell and 2 cells per block and the lenght of Feature vector length was 1188
 
