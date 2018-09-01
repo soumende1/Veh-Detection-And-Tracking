@@ -95,5 +95,11 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
 The results of passing all of the project test images through the above pipeline are displayed in the images below:
 
    ![Sample Images](./images/sample_images_car_no_car_withboxes.png)
+   
+   The final implementation performs very well, identifying the near-field vehicles in each of the images with no false positives.
+
+The first implementation did not perform as well, so I began by optimizing the SVM classifier. The original classifier used HOG features from the YUV Y channel only, and achieved a test accuracy of 96.28%. Using all three YUV channels increased the accuracy to 98.40%, but also tripled the execution time. However, changing the pixels_per_cell parameter from 8 to 16 produced a roughly ten-fold increase in execution speed with minimal cost to accuracy.
+
+Other optimization techniques included changes to window sizing and overlap as described above, and lowering the heatmap threshold to improve accuracy of the detection (higher threshold values tended to underestimate the size of the vehicle).
   
   
