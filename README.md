@@ -12,12 +12,14 @@ Note: for those first two steps don't forget to normalize your features and rand
 - Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 - Estimate a bounding box for vehicles detected.
 
-### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
+## 1 Writeup/Readme
+
+### 1.1 Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
 
 All of the code for the project is contained in the Jupyter notebook vehicle_detection_project.ipynb
 
-### Histogram of Oriented Gradients (HOG)
-1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+## 2 Histogram of Oriented Gradients (HOG)
+### 2.1 Explain how (and identify where in your code) you extracted HOG features from the training images. 
 
 I began by loading all of the vehicle and non-vehicle image paths from the provided dataset. [Car Training data set](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and [Non Car Training data set](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip) The figure below shows a random sample of images from both classes of the dataset. 
 
@@ -30,12 +32,12 @@ The method extract_features in the section titled "Method to Extract HOG Feature
 
 Next, in the section titled "Extract Features for Input Datasets and Combine, Define Labels Vector, Shuffle and Split," I define parameters for HOG feature extraction and extract features for the entire dataset. These feature sets are combined and a label vector is defined (1 for cars, 0 for non-cars). The features and labels are then shuffled and split into training and test sets in preparation to be fed to a linear support vector machine (SVM) classifier. The table below documents the twenty-five different parameter combinations that I explored.
 
-### 2. Explain how you settled on your final choice of HOG parameters.
+### 2.2 Explain how you settled on your final choice of HOG parameters.
 I experimented with a number of different combinations of color spaces and HOG parameters and trained a linear SVM using different combinations of HOG features extracted from the color channels. For HLS color space the L-channel appears to be most important, followed by the S channel. I discarded RGB color space, for its undesirable properties under changing light conditions. YUV and YCrCb also provided good results, but proved to be unstable when all channels were used. There was relatively little variation in the final accuracy when running the SVM with some of the individual channels of HSV,HLS and LUV.
 
 The final parameters chosen were YUV colorspace, 11 orientations, 16 pixels per cell, 2 cells per block, and ALL channels of the colorspace. 
 
-### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+### 2.3 Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 Before training the SVM classfier, the features were extracted from the car and non car images using the
     
@@ -53,8 +55,9 @@ Test Accuracy of SVC =  0.9811
      For these 20 labels:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
      & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
      
-## Sliding Window Search
-### 1. Describe how (and identify where in your code) you implemented a sliding window search. How did you decide what scales to search and how much to overlap windows?
+## 3 Sliding Window Search
+
+### 3.1 Describe how (and identify where in your code) you implemented a sliding window search. How did you decide what scales to search and how much to overlap windows?
 
 In the section titled "Method for Using Classifier to Detect Cars in an Image" I adapted the method find_cars from the lesson materials. The method combines HOG feature extraction with a sliding window search, but rather than perform feature extraction on each window individually which can be time consuming, the HOG features are extracted for the entire image (or a selected portion of it) and then these full-image features are subsampled according to the size of the window and then fed to the classifier. The method performs the classifier prediction on the HOG features for each window region and returns a list of rectangle objects corresponding to the windows that generated a positive ("car") prediction. in the chosen image (test1.jpg) , 6 rectangles were found in image
 
@@ -94,7 +97,7 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
   
    ![Final Box](./images/finalbox.png)
    
-  2. Show some examples of test images to demonstrate how your pipeline is working. What did you do to optimize the performance of your classifier?
+### 3.2 Show some examples of test images to demonstrate how your pipeline is working. What did you do to optimize the performance of your classifier?
 The results of passing all of the project test images through the above pipeline are displayed in the images below:
 
    ![Sample Images](./images/sample_images_car_no_car_withboxes.png)
@@ -105,16 +108,19 @@ The first implementation did not perform as well, so I began by optimizing the S
 
 Other optimization techniques included changes to window sizing and overlap as described above, and lowering the heatmap threshold to improve accuracy of the detection (higher threshold values tended to underestimate the size of the vehicle).
 
-Video Implementation
-1. Provide a link to your final video output. Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+## 4 Video Implementation
+
+### 4.1  Provide a link to your final video output. Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+
 [Here's a link to my video result](https://github.com/soumende1/Veh-Detection-And_Tracking/blob/master/project_video_out.mp4)
 
-2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
-The code for processing frames of video is contained in the cell titled "Pipeline for Processing Video Frames" and is identical to the code for processing a single image described above, with the exception of storing the detections (returned by find_cars) from the previous 15 frames of video using the prev_rects parameter from a class called Vehicle_Detect. Rather than performing the heatmap/threshold/label steps for the current frame's detections, the detections for the past 15 frames are combined and added to the heatmap and the threshold for the heatmap is set to 1 + len(det.prev_rects)//2 (one more than half the number of rectangle sets contained in the history) - this value was found to perform best empirically (rather than using a single scalar, or the full number of rectangle sets in the history).
+### 4.2 Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+The code for processing frames of video is contained in the cell titled <code> Pipeline for Processing Video Frames <\code> and is identical to the code for processing a single image described above, with the exception of storing the detections (returned by find_cars) from the previous 15 frames of video using the prev_rects parameter from a class called Vehicle_Detect. Rather than performing the heatmap/threshold/label steps for the current frame's detections, the detections for the past 15 frames are combined and added to the heatmap and the threshold for the heatmap is set to 1 + len(det.prev_rects)//2 (one more than half the number of rectangle sets contained in the history) - this value was found to perform best empirically (rather than using a single scalar, or the full number of rectangle sets in the history).
 
-Discussion
+## 5 Discussion
 
-1. Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail? What could you do to make it more robust?
+### 5.1  Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail? What could you do to make it more robust?
+
 The problems that I faced while implementing this project were mainly concerned with detection accuracy. Balancing the accuracy of the classifier with execution speed was crucial. Scanning 190 windows using a classifier that achieves 98% accuracy should result in around 4 misidentified windows per frame. Of course, integrating detections from previous frames mitigates the effect of the misclassifications, but it also introduces another problem: vehicles that significantly change position from one frame to the next (e.g. oncoming traffic) will tend to escape being labeled. Producing a very high accuracy classifier and maximizing window overlap might improve the per-frame accuracy to the point that integrating detections from previous frames is unnecessary (and oncoming traffic is correctly labeled), but it would also be far from real-time without massive processing power.
 
 The pipeline is probably most likely to fail in cases where vehicles (or the HOG features thereof) don't resemble those in the training dataset, but lighting and environmental conditions might also play a role (e.g. a white car against a white background). As stated above, oncoming cars are an issue, as well as distant cars (as mentioned earlier, smaller window scales tended to produce more false positives, but they also did not often correctly label the smaller, distant cars).
