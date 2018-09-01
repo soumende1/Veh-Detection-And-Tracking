@@ -3,6 +3,8 @@ This is the code for fourth project (Vehicle Detection and Tracking)
 
 ## The goals / steps of this project are the following:
 
+ the goal is to write a software pipeline to identify vehicles in a video from a front-facing camera on a car. Following steps were followed to acheive the goal.
+
 - Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
 - Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector.
 Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
