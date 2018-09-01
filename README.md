@@ -16,7 +16,7 @@ Note:  normalizization was done on the  features and randomization was used to s
 
 ### 1.1 Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
 
-All of the code for the project is contained in the Jupyter notebook <code><bold>**vehicle_detection_project.ipynb</bold></code>
+All of the code for the project is contained in the Jupyter notebook <code><bold>vehicle_detection_project.ipynb</bold></code>
 
 ## 2 Histogram of Oriented Gradients (HOG)
 ### 2.1 Explain how (and identify where in your code) you extracted HOG features from the training images. 
