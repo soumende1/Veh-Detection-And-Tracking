@@ -90,5 +90,8 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
   And the final detection area is set to the extremities of each identified label:
   
    ![Final Box](./images/finalbox.png)
+   
+  2. Show some examples of test images to demonstrate how your pipeline is working. What did you do to optimize the performance of your classifier?
+The results of passing all of the project test images through the above pipeline are displayed in the images below:
   
   
