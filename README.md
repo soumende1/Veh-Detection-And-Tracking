@@ -59,3 +59,8 @@ The image below shows the first attempt at using find_cars on one of the test im
 
 ![Cars_with_Boxes](./images/carwithboundedbox.png) 
  
+ I explored several configurations of window sizes and positions, with various overlaps in the X and Y directions. The following four images show the configurations of all search windows in the final implementation, for small (1x), medium (1.5x, 2x), and large (3x) windows:
+ ![Cars_with_Boxes](./images/carwithboxes-1.png) 
+ ![Cars_with_Boxes](./images/carwithboxes-2.png) 
+ ![Cars_with_Boxes](./images/carwithboxes-3.png) 
+ ![Cars_with_Boxes](./images/carwithboxes-4.png) 
