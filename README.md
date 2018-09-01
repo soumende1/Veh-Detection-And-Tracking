@@ -86,3 +86,7 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
  The  <code>scipy.ndimage.measurements.label()</code> function collects spatially contiguous areas of the heatmap and assigns each a label:
  
   ![Heat Map](./images/heatmap3.png)
+  
+  And the final detection area is set to the extremities of each identified label:
+  
+  
