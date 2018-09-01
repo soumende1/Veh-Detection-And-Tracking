@@ -48,9 +48,9 @@ In the section titled <code>"Train a Classifier"</code>, I trained a linear SVM 
 1.95 Seconds to train SVC...
 Test Accuracy of SVC =  0.9811
 
-     My SVC predicts:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
+         My SVC predicts:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
      For these 20 labels:  [1. 0. 1. 1. 1. 0. 0. 1. 0. 1. 1. 1. 1. 0. 0. 1. 1. 0. 1. 0.]
-     & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
+                                    & 0.01596 Seconds was the time taken to to predict 20 labels with SVC
      
 ## 3 Sliding Window Search
 
