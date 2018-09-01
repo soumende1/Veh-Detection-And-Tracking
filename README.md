@@ -89,4 +89,6 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
   
   And the final detection area is set to the extremities of each identified label:
   
+   ![Final Box](./images/finalbox.png)
+  
   
