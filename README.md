@@ -3,20 +3,20 @@ This is the code for fifth project (Vehicle Detection and Tracking)
 
 ## The goals / steps of this project are the following:
 
- the goal is to write a software pipeline to identify vehicles in a video from a front-facing camera on a car. Following steps were followed to acheive the goal.
+ The goal is to write a software pipeline to identify vehicles in a video from a front-facing camera on a car. Following steps were followed to acheive the goal.
 
-- Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-- Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector.
-Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-- Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-- Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-- Estimate a bounding box for vehicles detected.
+- Performed a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images, containing car and non-car images and train a  Linear SVM classifier
+- A color transform was used for extracting color features, as well as histograms of color. They were appended to  HOG feature vector.
+Note:  normalizization was done on the  features and randomization was used to select the testing and training datasets
+- Implemented a sliding-window technique and used the trained classifier to search for vehicles in images.
+- Ran the software pipeline on a video stream ( test_video.mp4 and later implement on project_video.mp4. Note the project_video.mp4 is the full video used in advanced lane detection project) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
+- Estimated a bounding box for vehicles detected in the above videos
 
 ## 1 Writeup/Readme
 
 ### 1.1 Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
 
-All of the code for the project is contained in the Jupyter notebook vehicle_detection_project.ipynb
+All of the code for the project is contained in the Jupyter notebook <code><bold>**vehicle_detection_project.ipynb</bold></code>
 
 ## 2 Histogram of Oriented Gradients (HOG)
 ### 2.1 Explain how (and identify where in your code) you extracted HOG features from the training images. 
