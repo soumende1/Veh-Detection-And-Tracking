@@ -13,3 +13,8 @@ Note: for those first two steps don't forget to normalize your features and rand
 ### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. 
 
 All of the code for the project is contained in the Jupyter notebook vehicle_detection_project.ipynb
+
+### Histogram of Oriented Gradients (HOG)
+1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+I began by loading all of the vehicle and non-vehicle image paths from the provided dataset. The figure below shows a random sample of images from both classes of the dataset.
+
