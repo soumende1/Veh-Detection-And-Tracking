@@ -16,6 +16,6 @@ All of the code for the project is contained in the Jupyter notebook vehicle_det
 
 ### Histogram of Oriented Gradients (HOG)
 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
-I began by loading all of the vehicle and non-vehicle image paths from the provided dataset. The figure below shows a random sample of images from both classes of the dataset. ![Car_NonCar](./images/car_noncar.png)
+I began by loading all of the vehicle and non-vehicle image paths from the provided dataset. The figure below shows a random sample of images from both classes of the dataset. ![Car_NonCar](./images/car_noncar.png) 
 
 The code for extracting HOG features from an image is defined by the method get_hog_features and is contained in the cell titled "Define Method to Convert Image to Histogram of Oriented Gradients (HOG)." The figure below shows a comparison of a car image and its associated histogram of oriented gradients, as well as the same for a non-car image.
