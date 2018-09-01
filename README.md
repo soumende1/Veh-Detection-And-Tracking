@@ -75,3 +75,14 @@ The image below shows the rectangles returned by find_cars drawn onto one of the
  ![Cars_with_Boxes](./images/carwithboxes-allcombined.png)
  
  Because a true positive is typically accompanied by several positive detections, while false positives are typically accompanied by only one or two detections, a combined heatmap and threshold is used to differentiate the two. The add_heat function increments the pixel value (referred to as "heat") of an all-black image the size of the original image at the location of each detection rectangle. Areas encompassed by more overlapping rectangles are assigned higher levels of heat. The following image is the resulting heatmap from the detections in the image above:
+ 
+  ![Heat Map](./images/heatmap1.png)
+  
+  A threshold is applied to the heatmap (in this example, with a value of 1), setting all pixels that don't exceed the threshold to 
+  zero. The result is below:
+  
+ ![Heat Map](./images/heatmap2.png)
+ 
+ The scipy.ndimage.measurements.label() function collects spatially contiguous areas of the heatmap and assigns each a label:
+ 
+  ![Heat Map](./images/heatmap3.png)
