@@ -21,3 +21,5 @@ I began by loading all of the vehicle and non-vehicle image paths from the provi
 ![Car_NonCar](./images/car_noncar.png) 
 
 The code for extracting HOG features from an image is defined by the method get_hog_features and is contained in the cell titled "Define Method to Convert Image to Histogram of Oriented Gradients (HOG)." The figure below shows a comparison of a car image and its associated histogram of oriented gradients, as well as the same for a non-car image.
+![Car_NonCar](./images/car-noncar-imgandhog.png) 
+
