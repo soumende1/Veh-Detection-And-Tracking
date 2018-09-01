@@ -25,12 +25,12 @@ I began by loading all of the vehicle and non-vehicle image paths from the provi
 
 ![Car_NonCar](./images/car_noncar.png) 
 
-The code for extracting HOG features from an image is defined by the method get_hog_features and is contained in the cell titled "Define Method to Convert Image to Histogram of Oriented Gradients (HOG)." The figure below shows a comparison of a car image and its associated histogram of oriented gradients, as well as the same for a non-car image.
+The code for extracting HOG features from an image is defined by the method **<code>get_hog_features</code>** and is contained in the cell titled <code>"Get Histogram of Oriented Gradients (HOG) features"</code>. The figure below shows a comparison of a car image and its associated histogram of oriented gradients image. Similarly the same is shown for a non-car image.
 ![Car_NonCar](./images/car-noncar-imgandhog.png) 
 
-The method extract_features in the section titled "Method to Extract HOG Features from an Array of Car and Non-Car Images" accepts a list of image paths and HOG parameters (as well as one of a variety of destination color spaces, to which the input image is converted), and produces a flattened array of HOG features for each image in the list.
+The method **<code>extract_features</code>** in the section titled <code>"Method to Extract HOG Features from an Array of Car and Non-Car Images"</code> accepts a list of image paths and HOG parameters (as well as one of a variety of destination color spaces, to which the input image is converted), and produces a flattened array of HOG features for each image in the list.
 
-Next, in the section titled "Extract Features for Input Datasets and Combine, Define Labels Vector, Shuffle and Split," I define parameters for HOG feature extraction and extract features for the entire dataset. These feature sets are combined and a label vector is defined (1 for cars, 0 for non-cars). The features and labels are then shuffled and split into training and test sets in preparation to be fed to a linear support vector machine (SVM) classifier. The table below documents the twenty-five different parameter combinations that I explored.
+Next, in the section titled <code>"Extract and Cobine Features . Assign Class Labels , Shuffle and Split"</code>. I define parameters for HOG feature extraction and extract features for the entire dataset. These feature sets are combined and a label vector is defined (1 for cars, 0 for non-cars). The features and labels are then shuffled and split into training and test sets in preparation to be fed to a linear support vector machine (SVM) classifier. 
 
 ### 2.2 Explain how you settled on your final choice of HOG parameters.
 I experimented with a number of different combinations of color spaces and HOG parameters and trained a linear SVM using different combinations of HOG features extracted from the color channels. For HLS color space the L-channel appears to be most important, followed by the S channel. I discarded RGB color space, for its undesirable properties under changing light conditions. YUV and YCrCb also provided good results, but proved to be unstable when all channels were used. There was relatively little variation in the final accuracy when running the SVM with some of the individual channels of HSV,HLS and LUV.
@@ -39,10 +39,7 @@ The final parameters chosen were YUV colorspace, 11 orientations, 16 pixels per 
 
 ### 2.3 Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-Before training the SVM classfier, the features were extracted from the car and non car images using the
-    
-    function 
-     extract_features
+Before training the SVM classfier, the features were extracted from the car and non car images using the function <code>extract_features</code>
 
 It took 158.2 Seconds to extract HOG features, Using: 11 orientations 16 pixels per cell and 2 cells per block and the lenght of Feature vector length was 1188
 
